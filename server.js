@@ -3,8 +3,8 @@ const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const bodyParser= require('body-parser')
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 require('dotenv').config()
 const PORT = 2200
 
@@ -21,13 +21,7 @@ db.once('open', _ => {
 db.on("error", console.error.bind(console, "mongo connection error"));
 
 
-const User = mongoose.model(
-    "User",
-    new Schema({
-        username: { type: String, required: true },
-        password: { type: String, required: true }
-    })
-);
+const User = require('./models/User')
 
 passport.use(
     new LocalStrategy((username, password, done) => {
@@ -64,6 +58,7 @@ passport.deserializeUser(function(id, done) {
 const app = express()
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -99,9 +94,10 @@ app.post("/signup", (req, res, next) => {
         }
         const user = new User({
             username: req.body.username,
+            firstName: req.body.firstname,
+            lastName: req.body.lastname,
             password: hashedPassword
         }).save(err => {
-          console.log(user)
           if (err) { 
               return next(err);
           }
