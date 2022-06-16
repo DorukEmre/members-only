@@ -81,8 +81,6 @@ app.get('/',(request, response) => {
     })
     .catch(error => console.error(error))
 })
-app.get("/login", (req, res) => res.render("login"));
-app.get("/signup", (req, res) => res.render("signup"));
 app.get("/log-out", (req, res) => {
     req.logout(function (err) {
       if (err) {
@@ -103,9 +101,10 @@ app.post("/signup", (req, res, next) => {
             username: req.body.username,
             password: hashedPassword
         }).save(err => {
-        if (err) { 
-            return next(err);
-        }
+          console.log(user)
+          if (err) { 
+              return next(err);
+          }
         res.redirect("/");
         });
     });

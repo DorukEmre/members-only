@@ -171,7 +171,7 @@ body {
   display: inline-block;
   height: 100%;
 }
-.header-li:hover a {
+.header-li.main:hover a {
   color: var(--clr-accent-300);
   text-decoration: underline;
 }
