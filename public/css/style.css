@@ -213,9 +213,9 @@ main {
 }
 
 
-/* //////////////////////////// */
-/*   Log-in and Sign-up modal   */
-/* //////////////////////////// */
+/* ////////////////////////////////////// */
+/*   Log-in, Sign-up and New post modal   */
+/* ////////////////////////////////////// */
 
 .overlay {
   position: fixed;
@@ -252,8 +252,7 @@ main {
   color: var(--clr-accent-400);
 }
 
-.login-panel,
-.signup-panel {
+.popup-panel {
   background-color: var(--clr-back-400);
   max-width: 340px;
   border-radius: 8px;
@@ -261,6 +260,7 @@ main {
   margin: 0 auto;
 }
 .panel-header h2 {
+  width: 80%;
   font-size: 1.5rem;
   font-weight: 400;
 }
@@ -275,24 +275,29 @@ main {
   font-weight: bold;
   margin-bottom: 5px;  
 }
-.form-group input {
-  height: 44px;
+.form-group input,
+.form-group textarea {
   box-shadow: inset 0 1px 2px var(--clr-neutral-600);
   display: block;
   width: 100%;
+  max-width: 100%;
   padding: 6px 12px;
   border: 1px solid var(--clr-neutral-300);
   border-radius: 4px;
   background-color: var(--clr-back-400);
   color: var(--clr-neutral-300);
 }
-.form-group input:focus {  
+.form-group input {
+  height: 44px;
+}
+.form-group input:focus,
+.form-group textarea:focus {  
   border: 2px solid var(--clr-accent-300);
   outline: 0;
   box-shadow: inset 0 1px 2px rgba(203,203,210,0.2),0 0 4px rgba(121,88,159,0.3);
 }
-.login-panel button,
-.signup-panel button {  
+
+.popup-panel button {  
   color: var(--clr-back-400);
   background-color: var(--clr-accent-300);
   font-size: 1.1rem;
@@ -303,8 +308,7 @@ main {
   cursor: pointer;
   transition-duration: 0.2s;
 }
-.login-panel button:hover,
-.signup-panel button:hover {
+.popup-panel button:hover {
   background-color: var(--clr-accent-400);
 }
 
