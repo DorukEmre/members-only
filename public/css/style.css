@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+/* //////////////////////
+  RESET - source: https://piccalil.li/blog/a-modern-css-reset
+  /////////////////////// */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul:where([role="list"]),
+ol:where([role="list"]) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* //////////////////////
+  General styling
+  /////////////////////// */
+
+
+:root {
+  --clr-back-300: #13212F; /* hsl(210, 42%, 13%) */
+  --clr-back-400: #20303F; /* hsl(209, 33%, 19%) */
+  
+  --clr-accent-300: #8ab7ff; /* hsl(217, 100%, 77%) */
+  --clr-accent-400: #82a1d4; /* hsl(217, 49%, 67%) */
+  
+  --clr-neutral-300: #d6e6ff; /* hsl(217, 100%, 92%) */
+  --clr-neutral-400: #a2b7cd; /* hsl(211, 30%, 72%) */
+  --clr-neutral-600: #546a83; /* hsl(212, 22%, 42%) */
+  
+  --ff-body: "Inter",sans-serif;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--clr-back-300);
+  color: var(--clr-neutral-300);
+  font-family: var(--ff-body);
+}
+
+/* ////////// */
+/*   Header   */
+/* ////////// */
+
+.header-navbar {
+  background-color: var(--clr-back-400);
+  width: 100vw;
+  height: 91px;
+}
+.header-ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  gap: 1em;
+  max-width: 70rem;
+  height: 100%;
+  padding: 0 32px;
+  margin: 0 auto;
+}
+.header-li {
+  min-width: 81px;
+  max-width: 150px;
+  flex-grow: 1;  
+  padding-top: 8px;
+  text-align: center;
+}
+.header-navbar a {
+  text-decoration: none;
+  color: var(--clr-neutral-400);
+  text-align: center;
+}
+.header-navbar p {
+  padding: 0 0 8px;
+}
+.nav-icon {
+  margin: 0 auto;
+}
+.header-ul.new-session {
+  justify-content: flex-end;
+}
+.header-li.login,
+.header-li.signup {
+  max-width: 85px;
+  padding-top: 0px;
+}
+.header-li.login a,
+.header-li.signup a {
+  color: var(--clr-accent-300);
+  padding: 10px;
+  border: 2px solid var(--clr-accent-300);
+  border-radius: 5px;
+}
+.header-li.login:hover a,
+.header-li.signup:hover a {
+  color: var(--clr-back-400);
+  background-color: var(--clr-accent-300);
+  transition-duration: 0.2s;
+}
+.logout-link {
+  display: inline-block;
+  height: 100%;
+}
+.header-li:hover a {
+  color: var(--clr-accent-300);
+  text-decoration: underline;
+}
+.header-li.active {
+  border-bottom: 3px solid var(--clr-accent-300);
+}
+.header-navbar a.active {
+  color: var(--clr-accent-300);
+}
+
+/* ////////// */
+/*   Main   */
+/* ////////// */
+main {
+  padding-bottom: 2.5rem;
+}
+
+.homepage-main {
+  height: calc(100vh - 91px - 2.5rem);
+}
+.hero-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  max-width: 72rem;
+  gap: 1em;
+  margin: 0 auto;
+  padding: 1rem 3rem;
+}
+.hero-title-container {
+  flex: 0 0 334px;
+  max-width: 100%;
+}
+.hero-title-container h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  color: var(--clr-accent-300);
+}
+
+
+/* //////////////////////////// */
+/*   Log-in and Sign-up modal   */
+/* //////////////////////////// */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+.popup {
+  margin: 70px auto;
+}
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+.panel-header .close {
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--clr-accent-300);
+}
+.panel-header .close:hover {
+  color: var(--clr-accent-400);
+}
+
+.login-panel,
+.signup-panel {
+  background-color: var(--clr-back-400);
+  max-width: 340px;
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 0 auto;
+}
+.panel-header h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {  
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 5px;  
+}
+.form-group input {
+  height: 44px;
+  box-shadow: inset 0 1px 2px var(--clr-neutral-600);
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  border: 1px solid var(--clr-neutral-300);
+  border-radius: 4px;
+  background-color: var(--clr-back-400);
+  color: var(--clr-neutral-300);
+}
+.form-group input:focus {  
+  border: 2px solid var(--clr-accent-300);
+  outline: 0;
+  box-shadow: inset 0 1px 2px rgba(203,203,210,0.2),0 0 4px rgba(121,88,159,0.3);
+}
+.login-panel button,
+.signup-panel button {  
+  color: var(--clr-back-400);
+  background-color: var(--clr-accent-300);
+  font-size: 1.1rem;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+.login-panel button:hover,
+.signup-panel button:hover {
+  background-color: var(--clr-accent-400);
+}
+
+/* ////////// */
+/*   Footer   */
+/* ////////// */
+/* footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+}
+footer p {
+  font-size: 0.8rem;
+  vertical-align: middle;
+} */
