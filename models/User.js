@@ -11,9 +11,7 @@ const user  = new Schema({
     password: { type: String, required: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    membershipStatus: { type: Boolean, default: false }
+    membershipStatus: { type: Boolean, default: false },
+    messages: [{ type: Schema.Types.ObjectId, ref: 'Message' }]
 })
 module.exports = mongoose.model('User', user)
-
-
-// updated: { type: Date, default: Date.now },
