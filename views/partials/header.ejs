@@ -1,0 +1,62 @@
+<nav class="header-navbar">
+    <% if (currentUser) {%>
+        <ul class="header-ul">
+            <li class="header-li">
+                <a href="#" class=""><img src="" alt="" class="nav-icon"><p>Add new post</p></a>
+            </li>
+            <li class="header-li">
+                <a href="#" class=""><img src="assets/nav_icons/#" alt="" class="nav-icon"><p>Explore</p></a>
+            </li>
+            <li class="header-li">
+                <a href="/log-out" class="logout-link"><p>Log Out</p></a>
+            </li>
+        </ul>
+    <% } else { %>
+        <ul class="header-ul new-session">
+            <li class="header-li login"><a href="#login" class="">Log in</a></li>
+            <li class="header-li signup"><a href="#signup" class="">Sign up</a></li>
+        </ul>
+    <%}%>
+</nav>
+<div id="login" class="overlay">
+	<div class="popup">
+        <div class="login-panel">
+            <div class="panel-header">
+                <h2>Log in</h2>
+                <a class="close" href="#">&times;</a>
+            </div>
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input name="username" placeholder="Username" type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input name="password" placeholder="Password" type="password" id="password" required>
+                </div>
+                <button>Log in</button>
+            </form>
+        </div>
+	</div>
+</div>
+<div id="signup" class="overlay">
+	<div class="popup">
+        <div class="signup-panel">
+            <div class="panel-header">
+                <h2>Sign up</h2>
+                <a class="close" href="#">&times;</a>
+            </div>
+            <form action="/signup" method="POST">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input name="username" placeholder="Username" type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input name="password" placeholder="Password" type="password" id="password" required>
+                </div>
+                <button>Sign up</button>
+            </form>
+        </div>
+	</div>
+</div>
