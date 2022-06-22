@@ -4,10 +4,16 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bodyParser= require('body-parser')
+const cookieParser = require('cookie-parser');
 const mongoose = require("mongoose");
+const compression = require('compression');
+const helmet = require('helmet');
+
 require('dotenv').config()
 const PORT = 2200
 
+
+const indexRouter = require('./routes/indexRouter');
 
 const mongoDb = process.env.DB_STRING;
 mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
@@ -18,8 +24,7 @@ const db = mongoose.connection;
 db.once('open', _ => {
   console.log('Connected to database on MongoDB')
 })
-db.on("error", console.error.bind(console, "mongo connection error"));
-
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const User = require('./models/User')
 
@@ -60,67 +65,36 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use(compression()); //Compress all routes
+app.use(helmet());
+
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
     next();
 });
 
-app.get('/',(request, response) => {
-    db.collection('posts').find().toArray()
-    .then(data => {
-        response.render('index.ejs', { info: data })
-    })
-    .catch(error => console.error(error))
-})
-app.get("/log-out", (req, res) => {
-    req.logout(function (err) {
-      if (err) {
-        return next(err);
-      }
-      res.redirect("/");
-    });
+app.use('/', indexRouter);
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+  // res.render("error", { title: "Error", error: error.array() })
 });
-
-app.post("/signup", (req, res, next) => {
-    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-        // if err, do something
-        // otherwise, store hashedPassword in DB
-        if (err) {
-            return next(err);
-        }
-        const user = new User({
-            username: req.body.username,
-            firstName: req.body.firstname,
-            lastName: req.body.lastname,
-            password: hashedPassword
-        }).save(err => {
-          if (err) { 
-              return next(err);
-          }
-        res.redirect("/");
-        });
-    });
-});
-
-app.post(
-    "/login",
-    passport.authenticate("local", {
-      successRedirect: "/",
-      failureRedirect: "/"
-    })
-);
-
-
-app.put('/...', (request, response) => {
-})
-
-app.delete('/...', (request, response) => {
-})
 
 app.listen(process.env.PORT || PORT, ()=>{
     console.log(`Server running on port ${PORT} http://localhost:${PORT}/`)
 })
+
+module.exports = app;
