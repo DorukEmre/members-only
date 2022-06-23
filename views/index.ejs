@@ -13,8 +13,12 @@
                 <h1>Members-only message board</h1>
             </div>
         </section>
-        <section>
-          <% if (messages) { %>            
+        <section class="messages-container">
+          <% if (messages) { %>
+            <%              
+            let date = '';
+            let now = Date.now();
+            %>       
             <% for( let i = 0; i < messages.length; i++ ) { %>
 
               <div class="message-card">
@@ -25,8 +29,25 @@
                   <p><%= messages[i].content %></p>
                 </div>
                 <div class="message-footer">
-                  <p>Posted by: <%= messages[i].author.username %></p>
-                  <p>On: <%= messages[i].timestamp %></p>
+                  <p>
+                    <span>Posted by <%= messages[i].author.username %></span>
+                  <% 
+                  let differenceDays = differenceInDays(now, messages[i].timestamp)
+                  let differenceHours = differenceInHours(now, messages[i].timestamp)
+                  if (differenceDays > 7) {
+                    date = 'on ' + format(messages[i].timestamp, 'do MMM yyyy');
+                  } else if (differenceDays > 1) {
+                    date = differenceDays + ' days ago';
+                  } else if (differenceHours > 1) {
+                    date = differenceHours + ' hours ago';
+                  } else if (differenceHours === 1) {
+                    date = differenceHours + ' hour ago';
+                  } else {
+                    date = differenceInMinutes(now, messages[i].timestamp) + ' minutes ago';
+                  }                  
+                  %> 
+                    <span><%= date %></span>
+                  </p>
                 </div>
               </div>
 

@@ -9,6 +9,8 @@ const mongoose = require("mongoose");
 const compression = require('compression');
 const helmet = require('helmet');
 
+const { format, differenceInMinutes, differenceInHours, differenceInDays } = require('date-fns')
+
 require('dotenv').config()
 const PORT = 2200
 
@@ -78,6 +80,11 @@ app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
     next();
 });
+// Set date-fns variables to a local available to all scripts in any EJS page
+app.locals.format = format;
+app.locals.differenceInDays = differenceInDays;
+app.locals.differenceInHours = differenceInHours;
+app.locals.differenceInMinutes = differenceInMinutes;
 
 app.use('/', indexRouter);
 

@@ -8,6 +8,7 @@ const Message = require('../models/Message');
 exports.home = (req, res) => {
   Message
     .find()
+    .sort({ timestamp: -1 })
     .populate('author')
     .exec((err, results) => {
       if (err) next(err); 

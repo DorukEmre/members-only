@@ -311,6 +311,38 @@ main {
 .popup-panel button:hover {
   background-color: var(--clr-accent-400);
 }
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 80%;
+  padding: 2rem;
+  margin: 0 auto;
+}
+
+.message-title,
+.message-content,
+.message-footer {
+  padding: 0.5rem 1rem;
+
+}
+.message-card {
+  width: 100%;
+  border-radius: 20px;
+  background-color: var(--clr-back-400);
+  padding: 0.5rem 0rem;
+}
+.message-content {
+  min-height: 5rem;
+  border-top: 1px solid var(--clr-neutral-600);
+  border-bottom: 1px solid var(--clr-neutral-600);
+}
+.message-footer p {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
 
 /* ////////// */
 /*   Footer   */
