@@ -31,7 +31,6 @@ exports.signup = (req, res, next) => {
       const user = new User({
           username: req.body.username,
           firstName: req.body.firstname,
-          lastName: req.body.lastname,
           password: hashedPassword
       }).save(err => {
         if (err) next(err); 
@@ -84,6 +83,7 @@ exports.joinclub_get = (req, res, next) => {
     res.redirect("/#login");
   }
 }
+
 exports.joinclub_post = (req, res, next) => {
   if (req.body.clubPasscode === process.env.PASSCODE) {
     User
@@ -95,20 +95,6 @@ exports.joinclub_post = (req, res, next) => {
           });          
     res.redirect('/');
   } else {
-    // Message wrong passcode
-  // var string = encodeURIComponent('something that would break');
-  // res.redirect('/your/redirection/url/?data=' + string);
-    res.redirect('/');
+    res.render('joinclub', { title: 'Join the club', message: 'Wrong passcode entry' });
   }
 }
-
-// ,
-//           function(err, result) {
-//             if (err) {
-//               console.log('error')
-//               next(err);
-//             } else {
-//               console.log('updated', req.user.membershipStatus)
-//               return res.redirect('/');
-//             }
-//           }

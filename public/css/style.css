@@ -327,6 +327,12 @@ main {
 .joinclub-container button:hover {
   background-color: var(--clr-accent-400);
 }
+.wrongpasscode {
+  color: red;
+}
+.already-a-member {
+  padding: 2rem;
+}
 .messages-container {
   display: flex;
   flex-direction: column;

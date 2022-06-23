@@ -1,5 +1,5 @@
 <%- include('partials/head.ejs') %>
-    <title><%= title %> | Book repository</title>
+    <title><%= title %> | Message board</title>
 </head>
 
 <body>
@@ -7,10 +7,19 @@
         <%- include('partials/header.ejs') %>
     </header>
 
+  <% if (currentUser.membershipStatus === true ) { %>
+    <div class="already-a-member">
+      <p>You are already a member of the club.</p>
+      <p>The author of each post on the home page should be visible.</p>
+    </div>     
+  <% } else { %>
     <section class="joinclub-container">      
       <div>
         <h1><%= title %></h1>
-        <p class="passcode-description">Type in the 'secret-passcode' to be able to see the author of the messages</p>
+        <p class="passcode-description">Type in the 'secret-passcode' to be able to see the author of each post.</p>
+        <% if (typeof message != 'undefined') { %>
+          <p class="wrongpasscode"><%= message %></p>
+        <% } %>
       </div>
       <form action="" method="POST">
           <div class="form-group">
@@ -19,6 +28,7 @@
           </div>
           <button>Join the club</button>
       </form>
-    </div>
+    </section>
+  <% } %>
     
 <%- include('partials/footer.ejs') %>
