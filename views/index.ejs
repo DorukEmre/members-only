@@ -12,7 +12,9 @@
         <section class="hero-container">
           <h1>Members-only message board</h1>
           <% if (!currentUser) { %>
-            <h3><a href="#login">Log in to post a new message</a></h3>           
+            <h3><a href="#login">Log in to post a new message</a></h3>
+          <% } else { %>
+            <h3>Welcome, <%= currentUser.firstName %>!</h3>
           <% } %>
         </section>
 
@@ -34,27 +36,27 @@
                 </div>
                 <div class="message-footer">
                   <p>
-                    <% if (currentUser) { %>
+                    <% if (currentUser && currentUser.membershipStatus === true) { %>
                       <span>Posted by <%= messages[i].author.username %></span>
                     <% } else { %>
                       <span>Posted by <em>hidden</em></span>                    
                     <% } %>
                     
-                  <% 
-                  let differenceDays = differenceInDays(now, messages[i].timestamp)
-                  let differenceHours = differenceInHours(now, messages[i].timestamp)
-                  if (differenceDays > 7) {
-                    date = 'on ' + format(messages[i].timestamp, 'do MMM yyyy');
-                  } else if (differenceDays > 1) {
-                    date = differenceDays + ' days ago';
-                  } else if (differenceHours > 1) {
-                    date = differenceHours + ' hours ago';
-                  } else if (differenceHours === 1) {
-                    date = differenceHours + ' hour ago';
-                  } else {
-                    date = differenceInMinutes(now, messages[i].timestamp) + ' minutes ago';
-                  }                  
-                  %> 
+                    <% 
+                    let diffDays = differenceInDays(now, messages[i].timestamp)
+                    let diffHours = differenceInHours(now, messages[i].timestamp)
+                    if (diffDays > 7) {
+                      date = 'on ' + format(messages[i].timestamp, 'do MMM yyyy');
+                    } else if (diffDays > 1) {
+                      date = diffDays + ' days ago';
+                    } else if (diffHours > 1) {
+                      date = diffHours + ' hours ago';
+                    } else if (diffHours === 1) {
+                      date = diffHours + ' hour ago';
+                    } else {
+                      date = differenceInMinutes(now, messages[i].timestamp) + ' minutes ago';
+                    }                  
+                    %> 
                     <span><%= date %></span>
                   </p>
                 </div>
