@@ -18,19 +18,16 @@ router.post("/signup", index_controller.signup);
 // POST request to log-in.
 router.post("/login", index_controller.login);
   
+// POST request to create a new message.
+router.post("/newpost", index_controller.newpost);
 
-router.post("/newpost",(req, res, next) => {
+// POST request to join the club.
+router.post("/joinclub", index_controller.joinclub);
 
-});
-
-router.post("/joinclub",(req, res, next) => {
-
-});
-
-router.put('/...', (request, response) => {
+router.put('/...', (req, res) => {
 })
 
-router.delete('/...', (request, response) => {
+router.delete('/...', (req, res) => {
 })
 
 

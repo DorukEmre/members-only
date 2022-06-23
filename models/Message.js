@@ -5,7 +5,7 @@ const format = require('date-fns')
 
 const Message  = new Schema({
     title: { type: String },
-    author: { type: String },
+    author: {type: Schema.Types.ObjectId, ref: 'User', required: true},
     timestamp: { type: Date, default: Date.now() },
     content: { type: String }
 })
