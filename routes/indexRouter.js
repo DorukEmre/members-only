@@ -1,48 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const passport = require("passport");
-const bcrypt = require("bcryptjs");
 const Message = require('../models/Message');
 const User = require('../models/User')
 
-router.get('/',(req, res) => {
-  Message
-    .find()
-    .exec((err, results) => {
-      if (err) next(err); 
-      res.render('index', { title: 'Home', error: err, data: results });
-  })
-})
-router.get("/log-out", (req, res) => {
-  req.logout(function (err) {
-    if (err) next(err); 
-    res.redirect("/");
-  });
-});
+const index_controller = require('../controllers/indexController');
 
-router.post("/signup", (req, res, next) => {
-  bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-      // if err, do something
-      // otherwise, store hashedPassword in DB
-      if (err) next(err); 
-      const user = new User({
-          username: req.body.username,
-          firstName: req.body.firstname,
-          lastName: req.body.lastname,
-          password: hashedPassword
-      }).save(err => {
-        if (err) next(err); 
-        res.redirect("/");
-      });
-  });
-});
 
-router.post("/login",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/"
-  })
-);
+/* GET home page. */
+router.get('/', index_controller.home);
+
+// GET request to log-out.
+router.get("/log-out", index_controller.logout);
+
+// POST request to sign-up.
+router.post("/signup", index_controller.signup);
+
+// POST request to log-in.
+router.post("/login", index_controller.login);
+  
 
 router.post("/newpost",(req, res, next) => {
 
