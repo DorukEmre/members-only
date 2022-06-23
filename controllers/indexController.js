@@ -45,8 +45,15 @@ exports.login = passport.authenticate("local", {
   failureRedirect: "/"
 })
 
+exports.newpost_get = (req, res, next) => {
+  if (req.user) {
+    res.render('newpost', { title: 'Add a new post' });
+  } else {    
+    res.redirect("/#login");
+  }
+}
 
-exports.newpost = [
+exports.newpost_post = [
   // Validate and sanitize fields.
   body('title', 'Post title must not be empty.').trim().isLength({ min: 1 }).escape(),
   body('message', 'Message invalid.').trim().isLength({ min: 1 }).escape(),
@@ -70,7 +77,13 @@ exports.newpost = [
   }
 ]
 
-
-exports.joinclub = (req, res, next) => {
-  res.send('joinclub')
+exports.joinclub_get = (req, res, next) => {
+  if (req.user) {
+    res.render('joinclub', { title: 'Join the club' });
+  } else {    
+    res.redirect("/#login");
+  }
+}
+exports.joinclub_post = (req, res, next) => {
+  res.send('joinclub_post')
 }

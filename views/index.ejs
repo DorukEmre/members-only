@@ -8,12 +8,14 @@
     </header>
 
     <main class="homepage-main">
+      
         <section class="hero-container">
-            <div class="hero-title-container">
-                <h1>Members-only message board</h1>
-            </div>
+          <h1>Members-only message board</h1>
+          <h3>Sign in to post a new message</h3>
         </section>
+
         <section class="messages-container">
+          
           <% if (messages) { %>
             <%              
             let date = '';
@@ -30,7 +32,12 @@
                 </div>
                 <div class="message-footer">
                   <p>
-                    <span>Posted by <%= messages[i].author.username %></span>
+                    <% if (currentUser) { %>
+                      <span>Posted by <%= messages[i].author.username %></span>
+                    <% } else { %>
+                      <span>Posted by <em>hidden</em></span>                    
+                    <% } %>
+                    
                   <% 
                   let differenceDays = differenceInDays(now, messages[i].timestamp)
                   let differenceHours = differenceInHours(now, messages[i].timestamp)

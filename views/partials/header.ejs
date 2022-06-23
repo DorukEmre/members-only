@@ -2,10 +2,13 @@
     <% if (currentUser) {%>
         <ul class="header-ul">
             <li class="header-li main">
-                <a href="#newpost" class=""><img src="" alt="" class="nav-icon"><p>Add new post</p></a>
+              <a href="/" class=""><img src="" alt="" class="nav-icon"><p>Home</p></a>
             </li>
             <li class="header-li main">
-                <a href="#joinclub" class=""><img src="assets/nav_icons/#" alt="" class="nav-icon"><p>Join the club</p></a>
+                <a href="newpost" class=""><img src="" alt="" class="nav-icon"><p>Add new post</p></a>
+            </li>
+            <li class="header-li main">
+                <a href="joinclub" class=""><img src="assets/nav_icons/#" alt="" class="nav-icon"><p>Join the club</p></a>
             </li>
             <li class="header-li main">
                 <a href="/log-out" class="logout-link"><p>Log Out</p></a>
@@ -64,44 +67,6 @@
                     <input name="password" placeholder="Password" type="password" id="password" required>
                 </div>
                 <button>Sign up</button>
-            </form>
-        </div>
-	</div>
-</div>
-<div id="newpost" class="overlay">
-	<div class="popup">
-        <div class="popup-panel">
-            <div class="panel-header">
-                <h2>Add new post</h2>
-                <a class="close" href="#">&times;</a>
-            </div>
-            <form action="/newpost" method="POST">
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input name="title" placeholder="Title" type="text" id="title" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Type your message" required></textarea>
-                </div>
-                <button>Post message</button>
-            </form>
-        </div>
-	</div>
-</div>
-<div id="joinclub" class="overlay">
-	<div class="popup">
-        <div class="popup-panel">
-            <div class="panel-header">
-                <h2>Enter 'secret-passcode' to join the club</h2>
-                <a class="close" href="#">&times;</a>
-            </div>
-            <form action="/joinclub" method="POST">
-                <div class="form-group">
-                    <label for="clubPasscode">Passcode</label>
-                    <input name="clubPasscode" placeholder="Passcode" type="password" id="clubPasscode" required>
-                </div>
-                <button>Join the club</button>
             </form>
         </div>
 	</div>
