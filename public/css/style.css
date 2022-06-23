@@ -203,6 +203,16 @@ main {
   line-height: 1.2;
   color: var(--clr-accent-300);
 }
+.hero-container h3 {
+  margin-top: 2rem;
+}
+.hero-container h3 a {
+  text-decoration: none;
+  color: var(--clr-neutral-300);
+}
+.hero-container h3 a:hover {
+  text-decoration: underline;
+}
 
 
 /* ////////////////////////////////////// */

@@ -85,5 +85,30 @@ exports.joinclub_get = (req, res, next) => {
   }
 }
 exports.joinclub_post = (req, res, next) => {
-  res.send('joinclub_post')
+  if (req.body.clubPasscode === process.env.PASSCODE) {
+    User
+      .findByIdAndUpdate(
+          req.user.id, 
+          { membershipStatus: true },
+          function (err, docs) {
+            if (err) next(err)
+          });          
+    res.redirect('/');
+  } else {
+    // Message wrong passcode
+  // var string = encodeURIComponent('something that would break');
+  // res.redirect('/your/redirection/url/?data=' + string);
+    res.redirect('/');
+  }
 }
+
+// ,
+//           function(err, result) {
+//             if (err) {
+//               console.log('error')
+//               next(err);
+//             } else {
+//               console.log('updated', req.user.membershipStatus)
+//               return res.redirect('/');
+//             }
+//           }

@@ -11,7 +11,6 @@ const user  = new Schema({
     password: { type: String, required: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    membershipStatus: { type: Boolean, default: false },
-    messages: [{ type: Schema.Types.ObjectId, ref: 'Message' }]
+    membershipStatus: { type: Boolean, default: false }
 })
 module.exports = mongoose.model('User', user)

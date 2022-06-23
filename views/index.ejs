@@ -8,10 +8,12 @@
     </header>
 
     <main class="homepage-main">
-      
+
         <section class="hero-container">
           <h1>Members-only message board</h1>
-          <h3>Sign in to post a new message</h3>
+          <% if (!currentUser) { %>
+            <h3><a href="#login">Log in to post a new message</a></h3>           
+          <% } %>
         </section>
 
         <section class="messages-container">
